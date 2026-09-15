@@ -1,0 +1,23 @@
+name: $(Build.BuildId)
+
+trigger:
+  branches:
+    include:
+      - main
+      - feature/*
+  paths:
+    include:
+      - projects/mbp/**
+      - shared/**
+      - pyscripts/**
+      - pyproject.toml
+      - uv.lock
+      - .azuredevops/mbp-ci-ghcr.yml
+
+
+extends:
+  template: /.azuredevops/templates/robot-image-pipeline.yml
+  parameters:
+    serviceName: 'mbp'
+    installChrome: 'true'
+

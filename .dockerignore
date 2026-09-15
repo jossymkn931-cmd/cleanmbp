@@ -1,0 +1,17 @@
+.venv
+**/.venv
+__pycache__
+**/__pycache__
+*.pyc
+.git
+.vscode
+.idea
+
+# Ignore local test outputs from build context
+results
+**/results
+output.xml
+log.html
+report.html
+*.png
+

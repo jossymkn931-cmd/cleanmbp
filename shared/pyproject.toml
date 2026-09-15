@@ -1,0 +1,18 @@
+[project]
+name = "shared"
+version = "1.0.0"
+dependencies = [
+    "reportlab>=5.0",
+    "pyscripts"
+]
+
+# This is needed because multiple top-level packages are preset
+# in the shared folder, so python needs to know what to register as a
+# package
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["listeners*", "python_utils*"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"

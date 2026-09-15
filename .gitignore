@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+
+# Robot outputs
+results/
+output.xml
+log.html
+report.html
+*.png
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build / packaging
+dist/
+build/
+*.egg-info/
+**/results/
+**/results/**
+.robotcode_cache
+shared/shared.egg-info/**
+pyscripts/src/pyscripts.egg-info/**
+
+projects/mbp/web/resources/variables/dev.py
+projects/mbp/web/resources/variables/sit.py

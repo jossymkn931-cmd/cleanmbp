@@ -1,0 +1,12 @@
+[tool.robotcode]
+workspace = "."
+python_executable = ".venv/Scripts/python.exe"
+
+[tool.robotcode.profiles.dev]
+variables = ["resources/variables/dev.py"]
+
+[tool.robotcode.profiles.sit]
+variables = ["resources/variables/sit.py"]
+
+[tool.robotcode.profiles.uat]
+variables = ["resources/variables/uat.py"]

@@ -1,0 +1,23 @@
+[project]
+name = "mbp-project-simba"
+version = "0.1.0"
+description = "Project Simba test automation monorepo"
+requires-python = ">=3.11"
+
+dependencies = [
+    "pyscripts",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+    "pyscripts",
+    "shared",
+    "projects/mbp",
+]
+
+[tool.uv.sources]
+pyscripts = { workspace = true }
+shared = { workspace = true }

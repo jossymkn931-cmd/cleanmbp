@@ -1,0 +1,8 @@
+[profiles.dev]
+variable-files = ["resources/variables/dev.py"]
+
+[profiles.sit]
+variable-files = ["resources/variables/sit.py"]
+
+[profiles.uat]
+variable-files = ["resources/variables/uat.py"]

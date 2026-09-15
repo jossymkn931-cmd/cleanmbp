@@ -1,0 +1,20 @@
+[project]
+name = "pyscripts"
+version = "1.0.0"
+dependencies = [
+    # Conditional dependency, only needed for python versions < 3.11
+    # The CI python version is < 3.11
+    "tomli>=2.0.1; python_version < '3.11'",
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pyscripts*"]
+
+
+[project.scripts]
+robot-runner = "pyscripts.runner.run:main"

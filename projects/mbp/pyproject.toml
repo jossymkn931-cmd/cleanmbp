@@ -1,0 +1,87 @@
+[project]
+name = "mbp"
+version = "0.1.0"
+description = "MBP API, Web, Android and iOS automation using Robot Framework"
+requires-python = ">=3.11"
+
+dependencies = [
+    "robotframework",
+    "robotframework-appiumlibrary",
+    "robotframework-browser",
+    "robotcode[runner]",
+    "robotframework-requests",
+    "truststore",
+    "requests",
+    "pillow",
+    "pyyaml",
+    "python-dotenv",
+]
+
+[tool.uv]
+package = false
+
+
+[tool.monorepo.commands]
+
+# Android mobile commands
+
+mobile-android-dev = [
+    "python",
+    "run_android.py",
+    "dev",
+]
+
+mobile-android-sit = [
+    "python",
+    "run_android.py",
+    "sit",
+]
+
+mobile-android-uat = [
+    "python",
+    "run_android.py",
+    "uat",
+]
+
+
+# Customer Web commands
+web-dev = [
+    "python",
+    "run_web.py",
+    "dev",
+]
+
+web-sit = [
+    "python",
+    "run_web.py",
+    "sit",
+]
+
+web-uat = [
+    "python",
+    "run_web.py",
+    "uat",
+]
+# API integration commands
+
+api-integration-dev = [
+    "python",
+    "run_api.py",
+    "dev",
+]
+
+api-integration-sit = [
+    "python",
+    "run_api.py",
+    "sit",
+]
+
+api-integration-uat = [
+    "python",
+    "run_api.py",
+    "uat",
+]
+
+
+[tool.azure-devops]
+test-plan-ids = [321383]

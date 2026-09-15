@@ -1,0 +1,84 @@
+parameters:
+  - name: projectName
+    type: string
+    default: mbp
+
+  - name: serviceName
+    type: string
+
+  - name: installChrome
+    type: string
+    default: 'true'
+    values:
+      - 'true'
+      - 'false'
+
+  - name: chromeVersion
+    type: string
+    default: '150.0.7871.181'
+
+resources:
+  repositories:
+    - repository: rfPipelineTemplates
+      type: git
+      name: 'Quality Engineering Center of Excellence/rf-pipeline-templates'
+      ref: refs/heads/main
+
+
+variables:
+  - name: projectName
+    value: ${{ parameters.projectName }}
+
+  - name: serviceName
+    value: ${{ parameters.serviceName }}
+
+  - name: imageRepository
+    value: qarf/${{ parameters.projectName }}/${{ parameters.serviceName }}
+
+  - name: tarFileName
+    value: ${{ parameters.projectName }}-${{ parameters.serviceName }}-$(Build.BuildId).tar
+
+  - group: kcb-global-pipeline-variables
+  - group: qe-coe-pipeline-variables
+
+  - name: ghcrRegistry
+    value: ghcr.io
+
+  - name: ghcrOwner
+    value: lewis-munene
+
+  - name: ghcrImageRepository
+    value: lewis-munene/qarf/${{ parameters.projectName }}/${{ parameters.serviceName }}
+
+
+stages:
+  - template: templates/stages/create-monorepo-manifest.yml@rfPipelineTemplates
+    parameters:
+      monorepoName: ${{ parameters.projectName }}
+
+  - template: templates/stages/register-monorepo-manifest.yml@rfPipelineTemplates
+    parameters:
+      dependsOn:
+        - CreateMonorepoManifest
+      monorepoName: ${{ parameters.projectName }}
+      rfProjectName: ${{ parameters.serviceName }}
+
+  - template: templates/stages/build-robot-framework-image.yml@rfPipelineTemplates
+    parameters:
+      dependsOn:
+        - CreateMonorepoManifest
+      monorepoName: ${{ parameters.projectName }}
+      serviceName: ${{ parameters.serviceName }}
+      imageRepository: $(imageRepository)
+      ghcrRegistry: $(ghcrRegistry)
+      ghcrImageRepository: $(ghcrImageRepository)
+      installChrome: ${{ parameters.installChrome }}
+      chromeVersion: ${{ parameters.chromeVersion }}
+      tarFileName: $(tarFileName)
+
+  - template: templates/stages/register-image-version.yml@rfPipelineTemplates
+    parameters:
+      dependsOn:
+        - BuildImage
+      monorepoName: ${{ parameters.projectName }}
+      rfProjectName: ${{ parameters.serviceName }}
