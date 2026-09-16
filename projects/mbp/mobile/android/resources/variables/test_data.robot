@@ -1,6 +1,9 @@
 *** Variables ***
 ${TRANSFER_AMOUNT}           100
 ${EXPECTED_AMOUNT_TEXT}      KES 100.00
+# Tariff charged on a Send to Other transfer. Set to the current tariff for the
+# environment; the transfer debit is the principal plus this charge.
+${SEND_TO_OTHER_CHARGE}      KES 0.00
 ${OTHER_MOBILE_NUMBER}       0714975875
 ${CONTACT_NAME}              Tsho
 ${CONTACT_LOCAL_NUMBER}      700480198

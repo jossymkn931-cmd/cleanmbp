@@ -3,6 +3,7 @@ Documentation    Send to Mobile transfer keywords
 Library          AppiumLibrary
 Library          Collections
 Library          String
+Library          ../libraries/money.py
 Resource         ../locators/send_money_locators.robot
 
 
@@ -256,3 +257,19 @@ Verify Transfer Was Submitted
 
     Expect Element    ${SEND_DONE_BUTTON}    visible
     RETURN    ${reference}
+
+
+Tap Done
+    [Documentation]    Dismiss the receipt and return to the dashboard.
+
+    Wait Until Element Is Visible    ${SEND_DONE_BUTTON}    timeout=30s
+    Click Element    ${SEND_DONE_BUTTON}
+
+
+Get Receipt Principal
+    [Documentation]    Return the principal shown on the receipt, in minor units.
+
+    Wait Until Element Is Visible    ${SEND_RESULT_PRINCIPAL}    timeout=30s
+    ${principal}=    Get Text    ${SEND_RESULT_PRINCIPAL}
+    ${amount}=    Parse Money    ${principal}
+    RETURN    ${amount}
